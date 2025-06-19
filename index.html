@@ -20,7 +20,7 @@
 <!-- ВЕРХНЯЯ ПАНЕЛЬ + БАННЕР (только в Лобби) -->
 <!-- ВЕРХНЯЯ ПАНЕЛЬ + БАННЕР -->
 <div id="lobbie-header">
-  <div class="lobby-banner">
+  <div class="lobby-banner" id="banner-container">
   <a href="#" class="slide active" target="_blank">
     <img src="./icons/open.jpg" alt="We are Open" class="promo-banner" />
   </a>
@@ -124,6 +124,18 @@
 </nav>
 
 <script>
+
+  const banner = document.querySelector(".lobby-banner");
+
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+    const maxScroll = 200; // Максимальное смещение вниз
+    const moveDown = Math.min(scrollY, maxScroll);
+
+    banner.style.transform = `translateY(${moveDown}px)`;
+  });
+
+  
   const tg = window.Telegram.WebApp;
   tg.expand();
 
