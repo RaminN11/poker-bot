@@ -40,7 +40,7 @@
 </div>
   <div class="top-bar">
     <div class="user-info">
-      <div class="avatar"></div>
+      <div class="avatar" id="avatar"></div>
       <h2 class="username">David</h2>
     </div>
     <div class="balance">
@@ -61,10 +61,9 @@
   <div id="lobbie">
     <div class="game-tabs">
       <button onclick="selectGame('poker')" class="tab active">Poker</button>
-      <button onclick="selectGame('blackjack')" class="tab">BlackJack</button>
-      <button onclick="selectGame('durak')" class="tab">Durak</button>
+      <button onclick="selectGame('durak')" class="tab ">Durak</button>
     </div>
-
+ 
     <div id="tables-list" class="game-list"></div>
 
     <div class="how-to-play">
@@ -84,7 +83,7 @@
   </div>
 
   <!-- ПРОФИЛЬ -->
-  <ul class="menu" id="profile" style="display:none">
+  <ul class="menu" id="guide" style="display:none">
     <li><i>📰</i> Новости</li>
     <li><i>👥</i> Друзья</li>
     <li><i>🎒</i> Предметы <span class="count">5</span></li>
@@ -95,17 +94,132 @@
     <li><i>❓</i> <span style="display: none;">0323</span>Правила</li>
     <li><i>🎲</i> Ещё</li>
   </ul>
+
+<div id="profile" class="profile-page">
+    <div class="profile-header">
+      <h2 class="profile-title">Профиль</h2>
+      <div class="profile-info">
+        <div class="avatar">R</div>
+        <div class="user-details">
+          <div class="username">Raminaz</div>
+          <div class="userid">ID: 219706</div>
+        </div>
+        <div class="telegram-icon">
+          <img src="https://img.icons8.com/ios-filled/20/ffffff/telegram-app.png" alt="Telegram" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Баланс и действия -->
+    <div class="profile-card">
+      <div class="balance-row">
+        <div class="balance-profile">$1</div>
+        <div class="transactions">Транзакции ></div>
+      </div>
+      <div class="actions">
+        <button class="topup">⬇ Пополнение</button>
+        <button class="withdraw">⬆ Вывод</button>
+      </div>
+    </div>
+
+    <!-- Меню -->
+    <div class="menu">
+      <div class="menu-item">➡ Перевести</div>
+      <div class="menu-item">🧾 История раздач</div>
+      <div class="menu-item">💬 Сообщение</div>
+      <div class="menu-item">💬 Свяжитесь с нами в чате</div>
+      <div class="menu-item">💬 О нас</div>
+      <div class="menu-item">💬 Язык</div>
+    </div>
+  </div>
 </div>
 
 <!-- МОДАЛКА ПОПОЛНЕНИЯ -->
-<div id="topup-modal">
-  <div class="topup-content">
-    <h2>Пополнить баланс</h2>
-    <input type="number" id="topup-amount" placeholder="Сумма $" />
-    <button onclick="confirmTopUp()">Пополнить</button>
-    <button class="cancel" onclick="closeTopUp()">Отмена</button>
+<div id="topup-modal" style="display: none;">
+  <div class="topup-header">
+  <button class="back-btn" onclick="closeTopUp()">←</button>
+  <h2>Пополнение</h2>
+</div>
+
+
+  <div class="topup-tabs">
+    <button class="tab-button active" data-tab="crypto">Криптовалюта</button>
+    <button class="tab-button" data-tab="fiat">Фиат</button>
+    <button class="tab-button" data-tab="tgstars">TG Stars</button>
+  </div>
+
+  <!-- Контент для Криптовалюта -->
+  <div class="tab-content active" id="crypto">
+    <div class="topup-currency-options">
+      <span class="token active">USDT</span>
+      <span class="token">USDC</span>
+      <span class="token">Wallet</span>
+      <span class="token">BTC</span>
+      <span class="token">....</span>
+    </div>
+
+    <div class="topup-note">
+      💡 Хотите оплатить фиатом? <a href="#">Нажмите здесь</a>
+    </div>
+
+    <div class="topup-selection">
+      <div class="select-box" onclick="toggleDropdown('currency')">
+      <strong>Валюта</strong>
+      <div class="selection-box" id="selected-currency">USDT</div>
+    </div>
+    <div class="select-box" onclick="toggleDropdown('network')">
+      <strong>Сеть</strong>
+      <div class="selection-box" id="selected-network">Tron</div>
+    </div>
+  </div>
+
+  <!-- Всплывающие списки -->
+  <div class="dropdown-menu" id="currency-dropdown">
+    <div class="dropdown-item" onclick="selectCurrency('USDT')">USDT</div>
+    <div class="dropdown-item" onclick="selectCurrency('USDC')">USDC</div>
+    <div class="dropdown-item" onclick="selectCurrency('BTC')">BTC</div>
+  </div>
+
+  <div class="dropdown-menu" id="network-dropdown">
+    <div class="dropdown-item" onclick="selectNetwork('Tron')">Tron</div>
+    <div class="dropdown-item" onclick="selectNetwork('Ethereum')">Ethereum</div>
+    <div class="dropdown-item" onclick="selectNetwork('BSC')">BSC</div>
+  </div>
+
+    <div class="topup-qr-section">
+      <div class="qr-address-container">
+        <img src="icons/qr.jpg" alt="QR Code" class="qr-code">
+        <div class="deposit-info">
+          <div class="deposit-label">Адрес депозита</div>
+          <div class="deposit-address">
+            <div class="address-text">хуй</div>
+            <button onclick="copyAddress()">📋 Копировать</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="topup-bonus">
+      🎁 Пополните впервые на <span class="highlight">$4.99</span> и получите <span class="highlight">$4.8</span>!
+    </div>
+
+    <div class="topup-warning">
+      ⚠️ Отправляйте только USDT на этот адрес. Минимальный депозит: 1.00 USDT.
+    </div>
+  </div>
+
+  <!-- Контент для Фиат -->
+  <div class="tab-content" id="fiat">
+    <p>Фиатная оплата будет доступна здесь. (Добавьте нужный контент)</p>
+  </div>
+
+  <!-- Контент для TG Stars -->
+  <div class="tab-content" id="tgstars">
+    <p>Информация о TG Stars. (Добавьте нужный контент)</p>
   </div>
 </div>
+
 
 <!-- НИЖНЕЕ МЕНЮ -->
 <nav class="bottom-tabs">
@@ -117,6 +231,10 @@
     <img src="icons/user-lock.svg" alt="Приват" />
     <span>Приват</span>
   </button>
+  <button class="tab-btn" onclick="showTab('guide', this)">
+    <img src="./icons/icons8-instructions-50.png" alt="Руководство" />
+    <span>Руководство</span>
+  </button>
   <button class="tab-btn" onclick="showTab('profile', this)">
     <img src="icons/user-round.svg" alt="Профиль" />
     <span>Профиль</span>
@@ -124,7 +242,6 @@
 </nav>
 
 <script>
-
   const banner = document.querySelector(".lobby-banner");
 
   window.addEventListener("scroll", () => {
@@ -135,7 +252,16 @@
     banner.style.transform = `translateY(${moveDown}px)`;
   });
 
-  
+  // Вешаем обработчик клика на аватарку в верхней панели
+  document.getElementById('avatar').addEventListener('click', () => {
+    // Ищем кнопку вкладки "Профиль"
+    const profileBtn = [...document.querySelectorAll('.bottom-tabs .tab-btn')]
+      .find(btn => btn.textContent.trim() === 'Профиль');
+    if (profileBtn) {
+      profileBtn.click(); // переключаем вкладку на профиль
+    }
+  });
+
   const tg = window.Telegram.WebApp;
   tg.expand();
 
@@ -143,20 +269,18 @@
     document.getElementById('splash-screen').style.display = 'none';
   }, 1500);
 
+// Модификация showTab для работы с новыми id вкладок
   function showTab(tabId, btn) {
-    // Показ/скрытие шапки и баннера
     document.getElementById("lobbie-header").style.display = (tabId === 'lobbie') ? 'block' : 'none';
-
-    // Скрываем все страницы
     document.querySelectorAll('#page-content > *').forEach(el => el.style.display = 'none');
-    document.getElementById(tabId).style.display = 'block';
+    const el = document.getElementById(tabId);
+    if (el) el.style.display = 'block';
 
-    // Обновляем нижние кнопки
     document.querySelectorAll('.bottom-tabs .tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+    if (btn) btn.classList.add('active');
   }
 
-  showTab('lobbie', document.querySelector('.bottom-tabs button'));
+  showTab('lobbie', document.querySelector('.bottom-tabs .tab-btn.active'));
 
   document.getElementById("topup-button").addEventListener("click", () => {
     document.getElementById("topup-modal").style.display = "flex";
@@ -217,12 +341,68 @@
   setInterval(nextSlide, interval);
 })();
 
+// Переключение вкладок в окне пополнения
+document.querySelectorAll('.tab-button').forEach(button => {
+  button.addEventListener('click', () => {
+    const tab = button.getAttribute('data-tab');
+
+    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    document.getElementById(tab).classList.add('active');
+  });
+});
+
+// Копирование адреса
+function copyAddress() {
+  const address = document.querySelector('.address-text').innerText;
+  navigator.clipboard.writeText(address).then(() => {
+    alert('Адрес скопирован в буфер обмена');
+  }).catch(() => {
+    alert('Не удалось скопировать адрес');
+  });
+}
+
+
+function toggleDropdown(type) {
+  document.getElementById('currency-dropdown').classList.remove('active');
+  document.getElementById('network-dropdown').classList.remove('active');
+
+  if (type === 'currency') {
+    document.getElementById('currency-dropdown').classList.add('active');
+  } else if (type === 'network') {
+    document.getElementById('network-dropdown').classList.add('active');
+  }
+}
+
+function selectCurrency(currency) {
+  document.getElementById('selected-currency').innerText = currency;
+  document.getElementById('currency-dropdown').classList.remove('active');
+}
+
+function selectNetwork(network) {
+  document.getElementById('selected-network').innerText = network;
+  document.getElementById('network-dropdown').classList.remove('active');
+}
+
+// Закрытие при клике вне меню
+window.addEventListener('click', (e) => {
+  const dropdowns = ['currency-dropdown', 'network-dropdown'];
+  if (!dropdowns.some(id => document.getElementById(id).contains(e.target)) &&
+      !e.target.closest('.selection-box')) {
+    dropdowns.forEach(id => document.getElementById(id).classList.remove('active'));
+  }
+});
+
+
+
+
 
 </script>
 
 </body>
 </html>
-
 
 
 
